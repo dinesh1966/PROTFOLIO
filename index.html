@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Portfolio</title>
+
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div id="prog"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar-custom" id="navbar">
+        <div class="nav-links" id="navLinks">
+            <div data-target="hero">Home</div>
+            <div data-target="about">About</div>
+            <div data-target="service">Service</div>
+            <div data-target="work">Work</div>
+            <div data-target="contact">Contact</div>
+        </div>
+    </nav>
+
+    <div id="mainLogo">
+        <div class="logo-text">ANTIGRAVITY</div>
+        <img src="https://res.cloudinary.com/drkgkgiat/image/upload/v1774333052/ChatGPT_Image_Mar_24__2026__11_00_11_AM-removebg-preview_p82mtt.png"
+            alt="Logo" class="logo-img">
+    </div>
+
+    <!-- ── HERO ── -->
+    <section class="hero" id="hero">
+        <div id="heroMagicRings"></div>
+        <div class="hero-orb hero-orb-1" id="heroOrb1"></div>
+        <div class="hero-orb hero-orb-2" id="heroOrb2"></div>
+        <p class="hero-sub">Creative Developer</p>
+        <h1 class="hero-title">
+            <span>Crafting</span>
+            <span class="accent">Digital</span>
+            <span>Experiences.</span>
+        </h1>
+        <p class="hero-desc">Designing and building products that live at the intersection of design and technology.</p>
+        <div class="hero-btns">
+            <button class="btn-primary main-book-trigger">Book Now</button>
+            <button class="btn-secondary" data-target="work">View Work</button>
+        </div>
+        <div class="hero-scroll-hint">Scroll</div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── ABOUT ── -->
+    <section id="about">
+        <div class="about-left">
+            <span class="about-tag">WHO WE ARE</span>
+            <h2 class="about-heading">
+                <span class="line">Building with</span>
+                <span class="line accent">purpose &</span>
+                <span class="line">precision.</span>
+            </h2>
+            <p class="about-body">We're a team of designers and developers focused on creating meaningful digital
+                experiences. With a sharp eye for detail and a love for clean code, we bridge the gap between beautiful
+                design and rock-solid engineering.</p>
+            <div class="about-skills">
+                <span class="skill-pill">UI / UX Design</span><span class="skill-pill">React</span><span
+                    class="skill-pill">GSAP</span><span class="skill-pill">Three.js</span><span
+                    class="skill-pill">Node.js</span><span class="skill-pill">Figma</span>
+            </div>
+            <div class="about-stats">
+                <div>
+                    <div class="stat-num" data-val="5" data-suffix="+">0+</div>
+                    <div class="stat-label">Years Exp.</div>
+                </div>
+                <div>
+                    <div class="stat-num" data-val="40" data-suffix="+">0+</div>
+                    <div class="stat-label">Projects</div>
+                </div>
+                <div>
+                    <div class="stat-num" data-val="20" data-suffix="+">0+</div>
+                    <div class="stat-label">Clients</div>
+                </div>
+            </div>
+        </div>
+        <div class="about-right">
+    <div class="about-card card-main">
+        <div class="card-main-inner">
+            <div class="card-main-label">Portfolio</div>
+
+            <!-- Image added here -->
+            <div class="card-image">
+                <img src="https://res.cloudinary.com/drkgkgiat/image/upload/v1774333052/ChatGPT_Image_Mar_24__2026__11_00_11_AM-removebg-preview_p82mtt.png" alt="Profile Image">
+            </div>
+
+            <div class="card-main-name">
+                Creative Dev<br>& Designer
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+            <div class="about-card card-mini">
+                <div class="card-mini-num" data-val="100" data-suffix="%">0%</div>
+                <div class="card-mini-text">Client Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── SERVICE ── -->
+    <section id="service">
+        <div class="svc-bg-text" id="svcBgTxt">SERVICES</div>
+        <div class="svc-orb svc-orb-1" id="svcOrb1"></div>
+        <div class="svc-orb svc-orb-2" id="svcOrb2"></div>
+
+        <div class="service-inner">
+            <div class="service-header">
+                <div>
+                    <span class="service-tag">What I Do</span>
+                    <h2 class="service-heading">Crafting <em>elite</em><br>digital services.</h2>
+                </div>
+                <p class="service-sub">Every pixel considered. Every interaction intentional. Every project delivered
+                    with precision.</p>
+            </div>
+
+            <div class="services-stack">
+
+                <div class="svc-row" data-icon="bi-palette" data-name="UI / UX Design">
+                    <div class="svc-num">01</div>
+                    <div class="svc-body">
+                        <div class="svc-title">UI / UX Design</div>
+                        <div class="svc-desc">From wireframes to polished interfaces — I craft visual systems that are
+                            both beautiful and rigorously functional. Design tokens, component libraries, and motion
+                            language included.
+                            <div class="svc-pills"><span class="svc-pill">Figma</span><span
+                                    class="svc-pill">Framer</span><span class="svc-pill">Design Systems</span><span
+                                    class="svc-pill">Prototyping</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-icon-right"><i class="bi bi-palette"></i></div>
+                    <div class="svc-arrow"><i class="bi bi-chevron-right"></i></div>
+                </div>
+
+                <div class="svc-row" data-icon="bi-code-slash" data-name="Web Development">
+                    <div class="svc-num">02</div>
+                    <div class="svc-body">
+                        <div class="svc-title">Web Development</div>
+                        <div class="svc-desc">High-performance web applications using React, Next.js, and cutting-edge
+                            APIs. Clean architecture, optimized bundles, and code that scales.
+                            <div class="svc-pills"><span class="svc-pill">React</span><span
+                                    class="svc-pill">Next.js</span><span class="svc-pill">TypeScript</span><span
+                                    class="svc-pill">Node.js</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-icon-right"><i class="bi bi-code-slash"></i></div>
+                    <div class="svc-arrow"><i class="bi bi-chevron-right"></i></div>
+                </div>
+
+                <div class="svc-row" data-icon="bi-bezier2" data-name="Motion & Animation">
+                    <div class="svc-num">03</div>
+                    <div class="svc-body">
+                        <div class="svc-title">Motion & Animation</div>
+                        <div class="svc-desc">Scroll-driven reveals, page transitions, cursor effects, and physics-based
+                            motion using GSAP. Animation that feels alive — not gimmicky.
+                            <div class="svc-pills"><span class="svc-pill">GSAP</span><span
+                                    class="svc-pill">ScrollTrigger</span><span class="svc-pill">CSS Motion</span><span
+                                    class="svc-pill">Lenis</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-icon-right"><i class="bi bi-bezier2"></i></div>
+                    <div class="svc-arrow"><i class="bi bi-chevron-right"></i></div>
+                </div>
+
+                <div class="svc-row" data-icon="bi-box" data-name="3D & WebGL">
+                    <div class="svc-num">04</div>
+                    <div class="svc-body">
+                        <div class="svc-title">3D & WebGL</div>
+                        <div class="svc-desc">Immersive 3D scenes, WebGL shaders, and generative visuals using Three.js.
+                            Where engineering meets art.
+                            <div class="svc-pills"><span class="svc-pill">Three.js</span><span
+                                    class="svc-pill">WebGL</span><span class="svc-pill">GLSL</span><span
+                                    class="svc-pill">R3F</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-icon-right"><i class="bi bi-box"></i></div>
+                    <div class="svc-arrow"><i class="bi bi-chevron-right"></i></div>
+                </div>
+
+                <div class="svc-row" data-icon="bi-pentagon" data-name="Brand Identity">
+                    <div class="svc-num">05</div>
+                    <div class="svc-body">
+                        <div class="svc-title">Brand Identity</div>
+                        <div class="svc-desc">Brand identity, logo systems, visual language, and positioning strategy —
+                            for startups that want to look like they've already made it.
+                            <div class="svc-pills"><span class="svc-pill">Branding</span><span class="svc-pill">Logo
+                                    Design</span><span class="svc-pill">Typography</span><span class="svc-pill">Color
+                                    Systems</span></div>
+                        </div>
+                    </div>
+                    <div class="svc-icon-right"><i class="bi bi-pentagon"></i></div>
+                    <div class="svc-arrow"><i class="bi bi-chevron-right"></i></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── PROJECTS (horizontal scroll) ── -->
+    <section id="projectsShowcase">
+        <div class="projects-header">
+            <h2>Selected Works</h2>
+        </div>
+        <div class="projects-container" id="projectsWrapper">
+            <div class="project-card">
+                <div class="project-num">01 / 03</div>
+                <img src="assets/projects/nexus.png" alt="Project Nexus" class="project-img">
+                <div class="project-info">
+                    <h2 class="project-title">PROJECT <span class="accent">NEXUS</span></h2>
+                    <p class="project-desc">A deep dive into minimalist architecture and futuristic spatial design.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-num">02 / 03</div>
+                <img src="assets/projects/vortex.png" alt="Project Vortex" class="project-img">
+                <div class="project-info">
+                    <h2 class="project-title">VORTEX <span class="accent">FLUIDS</span></h2>
+                    <p class="project-desc">Exploring the beauty of generative liquid motion through advanced shader
+                        development.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-num">03 / 03</div>
+                <img src="assets/projects/lumina.png" alt="Project Lumina" class="project-img">
+                <div class="project-info">
+                    <h2 class="project-title">LUMINA <span class="accent">APP</span></h2>
+                    <p class="project-desc">A premium luxury brand interface focused on elegance, typography, and elite
+                        UX.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── WORK ── -->
+    <section id="work">
+        <div class="work-header">
+            <div>
+                <span class="work-tag">Case Studies</span>
+                <h2 class="work-heading">Recent <em>Work</em></h2>
+            </div>
+            <div class="work-filter">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Design</button>
+                <button class="filter-btn">Dev</button>
+                <button class="filter-btn">3D</button>
+            </div>
+        </div>
+
+        <div class="work-grid">
+            <div class="work-item">
+                <div class="wi-bg"></div>
+                <div class="wi-overlay"></div>
+                <div class="wi-num">01</div>
+                <div class="wi-content">
+                    <div class="wi-cat">UI Design · Branding</div>
+                    <div class="wi-title">Aether — SaaS Dashboard</div>
+                    <div class="wi-desc">A command-centre interface for a fintech platform. Dark-mode first, data-dense
+                        but visually calm.</div>
+                    <a href="#" class="wi-link">View Case Study</a>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="wi-bg"></div>
+                <div class="wi-overlay"></div>
+                <div class="wi-num">02</div>
+                <div class="wi-content">
+                    <div class="wi-cat">3D · WebGL</div>
+                    <div class="wi-title">Vortex — 3D Landing</div>
+                    <div class="wi-desc">Fluid simulation landing page with real-time GLSL shaders and immersive scroll
+                        storytelling.</div>
+                    <a href="#" class="wi-link">View Case Study</a>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="wi-bg"></div>
+                <div class="wi-overlay"></div>
+                <div class="wi-num">03</div>
+                <div class="wi-content">
+                    <div class="wi-cat">Development · Motion</div>
+                    <div class="wi-title">Nomad — Travel App</div>
+                    <div class="wi-desc">Award-winning travel app UI with page-level GSAP transitions and geolocation
+                        features.</div>
+                    <a href="#" class="wi-link">View Case Study</a>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="wi-bg"></div>
+                <div class="wi-overlay"></div>
+                <div class="wi-num">04</div>
+                <div class="wi-content">
+                    <div class="wi-cat">Branding · Design</div>
+                    <div class="wi-title">Lumina — Brand System</div>
+                    <div class="wi-desc">Full visual identity for a luxury lifestyle brand — from logo to motion
+                        guidelines.</div>
+                    <a href="#" class="wi-link">View Case Study</a>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="wi-bg"></div>
+                <div class="wi-overlay"></div>
+                <div class="wi-num">05</div>
+                <div class="wi-content">
+                    <div class="wi-cat">Dev · Backend</div>
+                    <div class="wi-title">Nexus — Platform</div>
+                    <div class="wi-desc">Full-stack SaaS platform with real-time collaboration, built on Next.js and
+                        Supabase.</div>
+                    <a href="#" class="wi-link">View Case Study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="pricing-header">
+            <span class="pricing-tag">Packages</span>
+            <h2 class="pricing-title">Simple, transparent <br>pricing for your vision.</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="tier-name">Essential</div>
+                <div class="tier-price" data-price="499"><span class="price-symbol">$</span><span
+                        class="price-num">0</span><span class="price-period">/project</span></div>
+                <ul class="features-list">
+                    <li class="feature-item">Custom UI Design</li>
+                    <li class="feature-item">5 Pages Implementation</li>
+                    <li class="feature-item">Basic GSAP Animations</li>
+                    <li class="feature-item">Responsive Layout</li>
+                    <li class="feature-item">1 Month Support</li>
+                </ul>
+                <button class="pricing-btn main-book-trigger">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="tier-name">Advanced</div>
+                <div class="tier-price" data-price="999"><span class="price-symbol">$</span><span
+                        class="price-num">0</span><span class="price-period">/project</span></div>
+                <ul class="features-list">
+                    <li class="feature-item">Everything in Essential</li>
+                    <li class="feature-item">Unlimited Pages</li>
+                    <li class="feature-item">Advanced Scroll Effects</li>
+                    <li class="feature-item">3D Product Models</li>
+                    <li class="feature-item">Full SEO Optimization</li>
+                    <li class="feature-item">3 Months Support</li>
+                </ul>
+                <button class="pricing-btn main-book-trigger">Select Plan</button>
+            </div>
+            <div class="pricing-card">
+                <div class="tier-name">Elite</div>
+                <div class="tier-price" data-price="1999"><span class="price-symbol">$</span><span
+                        class="price-num">0</span><span class="price-period">/project</span></div>
+                <ul class="features-list">
+                    <li class="feature-item">Everything in Advanced</li>
+                    <li class="feature-item">Custom WebGL/Shaders</li>
+                    <li class="feature-item">Backend Integration</li>
+                    <li class="feature-item">E-commerce Features</li>
+                    <li class="feature-item">Priority 24/7 Support</li>
+                    <li class="feature-item">Dedicated Manager</li>
+                </ul>
+                <button class="pricing-btn main-book-trigger">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- REVIEWS -->
+    <section id="reviews">
+        <div class="reviews-header">
+            <span class="reviews-tag">Client Voices</span>
+            <h2 class="reviews-title">Trusted by industry leaders<br>across the globe.</h2>
+        </div>
+
+        <div class="reviews-marquee-wrap">
+            <div class="reviews-marquee" id="reviewsMarquee">
+                <!-- Replicated for continuous loop -->
+                <div class="review-circle-item" data-index="0">
+                    <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah">
+                    <div class="review-mini-info"><span>Sarah Chen</span></div>
+                </div>
+                <div class="review-circle-item" data-index="1">
+                    <img src="https://i.pravatar.cc/150?u=marcus" alt="Marcus">
+                    <div class="review-mini-info"><span>Marcus Sterling</span></div>
+                </div>
+                <div class="review-circle-item" data-index="2">
+                    <img src="https://i.pravatar.cc/150?u=elena" alt="Elena">
+                    <div class="review-mini-info"><span>Elena Rodriguez</span></div>
+                </div>
+                <div class="review-circle-item" data-index="3">
+                    <img src="https://i.pravatar.cc/150?u=david" alt="David">
+                    <div class="review-mini-info"><span>David Park</span></div>
+                </div>
+                <div class="review-circle-item" data-index="4">
+                    <img src="https://i.pravatar.cc/150?u=rachel" alt="Rachel">
+                    <div class="review-mini-info"><span>Rachel Thorne</span></div>
+                </div>
+                <!-- Duplicate for loop -->
+                <div class="review-circle-item" data-index="0">
+                    <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah">
+                    <div class="review-mini-info"><span>Sarah Chen</span></div>
+                </div>
+                <div class="review-circle-item" data-index="1">
+                    <img src="https://i.pravatar.cc/150?u=marcus" alt="Marcus">
+                    <div class="review-mini-info"><span>Marcus Sterling</span></div>
+                </div>
+                <div class="review-circle-item" data-index="2">
+                    <img src="https://i.pravatar.cc/150?u=elena" alt="Elena">
+                    <div class="review-mini-info"><span>Elena Rodriguez</span></div>
+                </div>
+                <div class="review-circle-item" data-index="3">
+                    <img src="https://i.pravatar.cc/150?u=david" alt="David">
+                    <div class="review-mini-info"><span>David Park</span></div>
+                </div>
+                <div class="review-circle-item" data-index="4">
+                    <img src="https://i.pravatar.cc/150?u=rachel" alt="Rachel">
+                    <div class="review-mini-info"><span>Rachel Thorne</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEW POPUP -->
+    <div id="reviewPopup" class="review-popup-modal">
+        <div class="rp-overlay" id="rpOverlay"></div>
+        <div class="rp-content">
+            <button class="rp-close" id="rpClose">&times;</button>
+            <div class="rp-body">
+                <div class="rp-quote">"</div>
+                <p class="rp-text" id="rpText">Review text goes here...</p>
+                <div class="rp-footer">
+                    <img src="" alt="" id="rpAvatar" class="rp-avatar">
+                    <div class="rp-meta">
+                        <h4 id="rpName">Sarah Chen</h4>
+                        <span id="rpRole">Founder @ TechFlow</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="faq-header"><span class="faq-tag">Questions</span>
+            <h2 class="faq-title">Frequently asked questions.</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item"><button class="faq-question">
+                    <h3>How long does a typical project take?</h3>
+                    <div class="faq-icon"></div>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">A standard landing page or portfolio usually takes 2–4 weeks. More
+                        complex web applications can take 2–3 months depending on scope.</div>
+                </div>
+            </div>
+            <div class="faq-item"><button class="faq-question">
+                    <h3>Do you provide ongoing maintenance?</h3>
+                    <div class="faq-icon"></div>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">Yes, I offer multiple support tiers. From basic security updates to
+                        prioritized 24/7 maintenance and feature additions, we ensure your site stays elite.</div>
+                </div>
+            </div>
+            <div class="faq-item"><button class="faq-question">
+                    <h3>What technologies do you specialize in?</h3>
+                    <div class="faq-icon"></div>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">My core stack includes React, Node.js, and GSAP for animations. I also
+                        specialize in WebGL (Three.js) for high-end 3D experiences and modern CSS architectures.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-bg-text">CONTACT</div>
+        <div class="contact-orb contact-orb-1"></div>
+        <div class="contact-orb contact-orb-2"></div>
+        <div class="contact-inner">
+            <div class="contact-left">
+                <span class="contact-tag">Get In Touch</span>
+                <h2 class="contact-heading">LET'S<br><span class="accent">WORK</span><br>TOGETHER.</h2>
+                <p class="contact-sub">Have a project in mind? I'd love to hear about it. Let's build something
+                    extraordinary together.</p>
+                <div class="contact-info-list">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">✉️</div>
+                        <div class="contact-info-text">
+                            <span class="contact-info-label">Email</span>
+                            hello@portfolio.com
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">📞</div>
+                        <div class="contact-info-text">
+                            <span class="contact-info-label">Phone</span>
+                            <a href="tel:+919876543210" class="contact-info-value">+91 98765 43210</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-links">
+                    <a href="#" class="contact-link">Dribbble</a>
+                    <a href="#" class="contact-link">Twitter</a>
+                    <a href="#" class="contact-link">LinkedIn</a>
+                    <a href="#" class="contact-link">Instagram</a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <div class="contact-card">
+                    <div class="contact-card-title">Start a Project</div>
+                    <div class="contact-card-sub">Ready to bring your vision to life? Book a free discovery call and
+                        let's talk about your goals.</div>
+                    <ul class="contact-feature-list">
+                        <li>Free 30-min discovery call</li>
+                        <li>Custom proposal within 48 hrs</li>
+                        <li>Transparent pricing & timeline</li>
+                        <li>No long-term contracts</li>
+                    </ul>
+                    <div class="contact-avail">
+                        <div class="avail-dot"></div>
+                        <span class="avail-text">Available for new projects</span>
+                    </div>
+                    <button class="btn-book main-book-trigger">
+                        Book a Project
+                        <span class="btn-book-arrow">↗</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand"><img
+                    src="https://res.cloudinary.com/drkgkgiat/image/upload/v1774332582/ChatGPT_Image_Mar_24_2026_11_00_11_AM_v5sqdd.png"
+                    alt="Logo" style="height:40px;width:auto;display:block;margin-bottom:20px;">
+                <p>Crafting digital excellence through minimalist design and advanced technology.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#work">Work</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#service">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Dribbble</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Office</h4>
+                <p
+                    style="font-family:var(--font-body);font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.7;">
+                    Creative Studio,<br>Tech Park, 4th Floor<br>Bangalore, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2026 Creative Portfolio. All rights reserved.</div>
+            <div>Designed with &hearts; by Antigravity</div>
+        </div>
+    </footer>
+
+    <!-- External JS Libraries (must load before main.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+    <!-- BOOKING MODAL -->
+    <div id="bookingModal" class="booking-modal">
+        <div class="bm-overlay" id="bmOverlay"></div>
+        <div class="bm-content">
+            <button class="bm-close" id="bmClose">&times;</button>
+
+            <!-- Step 1: Calendar -->
+            <div id="bmStepCalendar" class="bm-step active">
+                <h2 class="bm-title">Select Date & Time</h2>
+                <div class="calendar-wrap">
+                    <div class="calendar-header">
+                        <button id="prevMonth">&lt;</button>
+                        <h3 id="currentMonthYear">March 2026</h3>
+                        <button id="nextMonth">&gt;</button>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                </div>
+                <div class="time-slots-wrap">
+                    <h4>Available Slots</h4>
+                    <div class="time-slots" id="timeSlots">
+                        <div class="time-slot" data-time="09:00 AM">09:00 AM</div>
+                        <div class="time-slot" data-time="11:00 AM">11:00 AM</div>
+                        <div class="time-slot" data-time="02:00 PM">02:00 PM</div>
+                        <div class="time-slot" data-time="04:00 PM">04:00 PM</div>
+                    </div>
+                </div>
+                <button class="bm-next-btn" id="toFormBtn" disabled>Next: Project Details</button>
+            </div>
+
+            <!-- Step 2: Form -->
+            <div id="bmStepForm" class="bm-step">
+                <h2 class="bm-title">Project Details</h2>
+                <form class="bm-form" id="bookingForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Project Brief</label>
+                        <textarea name="brief" placeholder="Tell me about your vision..." required></textarea>
+                    </div>
+                    <div class="selected-time-info">
+                        Selected: <span id="summaryDateTime">Mar 25, 2026 at 11:00 AM</span>
+                    </div>
+                    <button type="submit" class="bm-submit-btn">Submit Request</button>
+                </form>
+            </div>
+
+            <!-- Step 3: Success -->
+            <div id="bmStepSuccess" class="bm-step">
+                <div class="success-icon">✓</div>
+                <h2 class="bm-title">Request Sent!</h2>
+                <p>I'll get back to you within 24 hours to confirm our call. Look forward to working together!</p>
+                <button class="bm-next-btn" id="bmFinalClose">Back to Portfolio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Script -->
+    <script src="main.js"></script>
+</body>
+
+</html>
