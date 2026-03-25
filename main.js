@@ -47,17 +47,18 @@ function setupAnimation() {
     gsap.set(logo, { opacity: 1 });
     gsap.set(".logo-text", { opacity: 1 });
     gsap.set(".logo-img", { opacity: 0 });
-    gsap.set(navbar, { autoAlpha: 0 });
     gsap.set(".hero", { autoAlpha: 0 });
 
     const lw = navLinks.offsetWidth, px = 28, tw = lw + px * 2, nt = 30;
     const nh = navbar.offsetHeight || 50, tl = (window.innerWidth - tw) / 2;
-    gsap.set(navbar, { left: tl, width: tw, top: nt });
+    gsap.set(navbar, { autoAlpha: 1, left: tl, width: tw, top: nt, background: "rgba(255,255,255,0.08)", backdropFilter: "blur(25px)" });
     gsap.set(logo, { position: "fixed", left: 0, top: 0, x: 0, y: 0, scale: 1, fontSize: "16px" });
 
     const lW = logo.offsetWidth, lH = logo.offsetHeight;
-    const ew = px + lW + 24 + lw + px, fr = tl + tw, el = fr - ew;
-    const rx2 = el + px, ry2 = nt + (nh - lH) / 2;
+    const imgNode = document.querySelector(".logo-img");
+    const flW = (imgNode && imgNode.offsetWidth > 0) ? imgNode.offsetWidth : 45;
+    const ew = px + flW + 24 + lw + px, fr = tl + tw, el = fr - ew;
+    const rx2 = el + px - (lW - flW) / 2, ry2 = nt + (nh - lH) / 2;
     const hs = Math.min((window.innerWidth * .45) / lW, (window.innerHeight * .20) / lH);
     const hx = window.innerWidth / 2 - rx2 - (lW * hs) / 2, hy = window.innerHeight / 2 - ry2 - lH / 2;
 
@@ -67,7 +68,7 @@ function setupAnimation() {
     tl2.to(logo, { x: 0, y: 0, scale: 1, ease: "expo.inOut", duration: 0.5 }, 0);
     tl2.to(".logo-text", { opacity: 0, duration: 0.25, ease: "power2.inOut" }, 0);
     tl2.to(".logo-img", { opacity: 1, duration: 0.25, ease: "power2.inOut" }, 0.25);
-    tl2.to(navbar, { autoAlpha: 1, left: el, width: ew, background: "rgba(255,255,255,0.08)", backdropFilter: "blur(25px)", ease: "expo.inOut", duration: 0.5 }, 0);
+    tl2.to(navbar, { left: el, width: ew, ease: "expo.inOut", duration: 0.5 }, 0);
     const r = 0.45;
     tl2.to(".hero", { autoAlpha: 1, duration: 0.1 }, r);
     tl2.to(".hero-sub", { opacity: 1, y: 0, ease: "power2.out", duration: 0.1 }, r + 0.08);
@@ -94,7 +95,6 @@ function setupParallax() {
     gsap.to("#heroOrb2", { y: -80, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 2 } });
 
     gsap.to(".card-main", { y: -50, ease: "none", scrollTrigger: { trigger: "#about", start: "top bottom", end: "bottom top", scrub: 1.8 } });
-    gsap.to(".card-mini", { y: 35, ease: "none", scrollTrigger: { trigger: "#about", start: "top bottom", end: "bottom top", scrub: 2.5 } });
 
     // BACKGROUND TEXT PARALLAX
     gsap.to(".svc-bg-text", { x: -100, ease: "none", scrollTrigger: { trigger: "#service", start: "top bottom", end: "bottom top", scrub: 1 } });
@@ -118,10 +118,9 @@ function setupAbout() {
     gsap.from(".skill-pill", { scale: .75, opacity: 0, duration: .45, stagger: .07, ease: "back.out(1.6)", scrollTrigger: { ...st, start: "top 58%" } });
     gsap.to(".about-stats", { opacity: 1, y: 0, duration: .8, ease: "power3.out", scrollTrigger: { ...st, start: "top 54%" } });
     gsap.to(".card-main", { opacity: 1, y: 0, rotate: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { ...st, start: "top 75%" } });
-    gsap.to(".card-mini", { opacity: 1, y: 0, rotate: 0, duration: 1.1, delay: .18, ease: "expo.out", scrollTrigger: { ...st, start: "top 75%" } });
 
     /* ── ODOMETER COUNT-UP – every visit (about stats) ── */
-    document.querySelectorAll(".stat-num[data-val], .card-mini-num[data-val]").forEach(el => {
+    document.querySelectorAll(".stat-num[data-val]").forEach(el => {
         const target = parseInt(el.dataset.val);
         const suffix = el.dataset.suffix || "";
         el.textContent = "0" + suffix;
@@ -312,154 +311,7 @@ function setupContactFooter() {
     gsap.from(".footer-grid > div", { opacity: 0, y: 30, duration: 1, stagger: .1, scrollTrigger: { trigger: "footer", start: "top 85%" } });
 }
 
-/* ── MAGIC RINGS (hero bg) ── */
-function initMagicRings() {
-    const mount = document.getElementById('heroMagicRings');
-    if (!mount || typeof THREE === 'undefined') return;
 
-    const vertexShader = `
-void main() {
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}`;
-
-    const fragmentShader = `
-precision highp float;
-uniform float uTime, uAttenuation, uLineThickness;
-uniform float uBaseRadius, uRadiusStep, uScaleRate;
-uniform float uOpacity, uNoiseAmount, uRotation, uRingGap;
-uniform float uFadeIn, uFadeOut;
-uniform float uMouseInfluence, uHoverAmount, uHoverScale, uParallax, uBurst;
-uniform vec2 uResolution, uMouse;
-uniform vec3 uColor, uColorTwo;
-uniform int uRingCount;
-const float HP = 1.5707963;
-const float CYCLE = 3.45;
-float fade(float t) {
-  return t < uFadeIn ? smoothstep(0.0, uFadeIn, t) : 1.0 - smoothstep(uFadeOut, CYCLE - 0.2, t);
-}
-float ring(vec2 p, float ri, float cut, float t0, float px) {
-  float t = mod(uTime + t0, CYCLE);
-  float r = ri + t / CYCLE * uScaleRate;
-  float d = abs(length(p) - r);
-  float a = atan(abs(p.y), abs(p.x)) / HP;
-  float th = max(1.0 - a, 0.5) * px * uLineThickness;
-  float h = (1.0 - smoothstep(th, th * 1.5, d)) + 1.0;
-  d += pow(cut * a, 3.0) * r;
-  return h * exp(-uAttenuation * d) * fade(t);
-}
-void main() {
-  float px = 1.0 / min(uResolution.x, uResolution.y);
-  vec2 p = (gl_FragCoord.xy - 0.5 * uResolution.xy) * px;
-  float cr = cos(uRotation), sr = sin(uRotation);
-  p = mat2(cr, -sr, sr, cr) * p;
-  p -= uMouse * uMouseInfluence;
-  float sc = mix(1.0, uHoverScale, uHoverAmount) + uBurst * 0.3;
-  p /= sc;
-  vec3 c = vec3(0.0);
-  float rcf = max(float(uRingCount) - 1.0, 1.0);
-  for (int i = 0; i < 10; i++) {
-    if (i >= uRingCount) break;
-    float fi = float(i);
-    vec2 pr = p - fi * uParallax * uMouse;
-    vec3 rc = mix(uColor, uColorTwo, fi / rcf);
-    c = mix(c, rc, vec3(ring(pr, uBaseRadius + fi * uRadiusStep, pow(uRingGap, fi), i == 0 ? 0.0 : 2.95 * fi, px)));
-  }
-  c *= 1.0 + uBurst * 2.0;
-  float n = fract(sin(dot(gl_FragCoord.xy + uTime * 100.0, vec2(12.9898, 78.233))) * 43758.5453);
-  c += (n - 0.5) * uNoiseAmount;
-  gl_FragColor = vec4(c, max(c.r, max(c.g, c.b)) * uOpacity);
-}`;
-
-    let renderer;
-    try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
-    catch (e) { return; }
-
-    renderer.setClearColor(0x000000, 0);
-    renderer.domElement.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
-    mount.appendChild(renderer.domElement);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10);
-    camera.position.z = 1;
-
-    const uniforms = {
-        uTime: { value: 0 },
-        uAttenuation: { value: 8 },
-        uResolution: { value: new THREE.Vector2() },
-        uColor: { value: new THREE.Color('#3a86ff') },
-        uColorTwo: { value: new THREE.Color('#42fcff') },
-        uLineThickness: { value: 2.5 },
-        uBaseRadius: { value: 0.32 },
-        uRadiusStep: { value: 0.09 },
-        uScaleRate: { value: 0.12 },
-        uRingCount: { value: 7 },
-        uOpacity: { value: 0.85 },
-        uNoiseAmount: { value: 0.06 },
-        uRotation: { value: 0 },
-        uRingGap: { value: 1.5 },
-        uFadeIn: { value: 0.7 },
-        uFadeOut: { value: 0.5 },
-        uMouse: { value: new THREE.Vector2() },
-        uMouseInfluence: { value: 0.18 },
-        uHoverAmount: { value: 0 },
-        uHoverScale: { value: 1.15 },
-        uParallax: { value: 0.04 },
-        uBurst: { value: 0 },
-    };
-
-    const material = new THREE.ShaderMaterial({
-        vertexShader, fragmentShader, uniforms, transparent: true
-    });
-    const quad = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
-    scene.add(quad);
-
-    const resize = () => {
-        const w = mount.clientWidth || window.innerWidth;
-        const h = mount.clientHeight || window.innerHeight;
-        const dpr = Math.min(window.devicePixelRatio, 2);
-        renderer.setSize(w, h);
-        renderer.setPixelRatio(dpr);
-        uniforms.uResolution.value.set(w * dpr, h * dpr);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    const ro = new ResizeObserver(resize); ro.observe(mount);
-
-    const mouse = [0, 0], smooth = [0, 0];
-    let hovered = false, burst = 0;
-
-    mount.parentElement.addEventListener('mousemove', e => {
-        const r = mount.getBoundingClientRect();
-        mouse[0] = (e.clientX - r.left) / r.width - 0.5;
-        mouse[1] = -((e.clientY - r.top) / r.height - 0.5);
-    });
-    mount.parentElement.addEventListener('mouseenter', () => { hovered = true; });
-    mount.parentElement.addEventListener('mouseleave', () => { hovered = false; mouse[0] = 0; mouse[1] = 0; });
-    mount.parentElement.addEventListener('click', () => { burst = 1; });
-
-    let rafId;
-    const animate = t => {
-        rafId = requestAnimationFrame(animate);
-        smooth[0] += (mouse[0] - smooth[0]) * 0.08;
-        smooth[1] += (mouse[1] - smooth[1]) * 0.08;
-        uniforms.uHoverAmount.value += ((hovered ? 1 : 0) - uniforms.uHoverAmount.value) * 0.08;
-        burst *= 0.95; if (burst < 0.001) burst = 0;
-        uniforms.uTime.value = t * 0.001 * 0.9;
-        uniforms.uMouse.value.set(smooth[0], smooth[1]);
-        uniforms.uBurst.value = burst;
-        renderer.render(scene, camera);
-    };
-    rafId = requestAnimationFrame(animate);
-
-    /* clean up when page unloads */
-    window.addEventListener('beforeunload', () => {
-        cancelAnimationFrame(rafId);
-        window.removeEventListener('resize', resize);
-        ro.disconnect();
-        renderer.dispose();
-        material.dispose();
-    });
-}
 
 /* ── INIT ── */
 window.addEventListener('load', () => {
@@ -471,9 +323,161 @@ window.addEventListener('load', () => {
     setupReviews();
     setupFAQ();
     setupContactFooter();
-    initMagicRings();
+
     setupBookingSystem();
+    setupCaseStudyOverlay();
 });
+
+/* ── CASE STUDY OVERLAY ── */
+function setupCaseStudyOverlay() {
+    const workLinks = document.querySelectorAll('.wi-link');
+    const projectBtns = document.querySelectorAll('.view-cs-btn');
+    const overlay = document.getElementById('caseStudyOverlay');
+    const backBtn = document.getElementById('csBackBtn');
+    
+    const csCat = document.getElementById('csCat');
+    const csTitle = document.getElementById('csTitle');
+    const csDesc = document.getElementById('csDesc');
+    const csChallenge = document.getElementById('csChallenge');
+    const csWorkList = document.getElementById('csWorkList');
+    const csResult = document.getElementById('csResult');
+    const csHeroImg = document.getElementById('csHeroImg');
+    
+    const csGrowth = document.getElementById('csGrowthSection');
+    const csStandard = document.getElementById('csStandardSection');
+
+    function openOverlay() {
+        if (typeof lenis !== 'undefined') lenis.stop();
+        document.body.style.overflow = 'hidden'; // Fallback
+        
+        // Reset and prepare
+        gsap.set(overlay, { 
+            display: 'block', 
+            opacity: 1, // Start opaque but clipped
+            clipPath: 'circle(0% at 50% 50%)',
+            pointerEvents: 'all' // Enable immediately for responsiveness
+        });
+        overlay.scrollTop = 0;
+        
+        const tl = gsap.timeline({ defaults: { ease: "power4.inOut" } });
+        
+        // Circular wipe reveal - faster and larger
+        tl.to(overlay, { 
+            clipPath: 'circle(150% at 50% 50%)', 
+            duration: 1.1
+        });
+        
+        // Content reveal - more aggressive
+        tl.fromTo('#csContent > *',
+            { opacity: 0, y: 60, scale: 0.95, filter: 'blur(10px)' },
+            { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.8, stagger: 0.08, ease: "expo.out" },
+            "-=0.7"
+        );
+        
+        // Image reveal
+        tl.fromTo(csHeroImg, 
+            { scale: 1.2, filter: 'brightness(0)' },
+            { scale: 1, filter: 'brightness(1)', duration: 1.2, ease: "power3.out" },
+            "-=0.8"
+        );
+
+        // Staggered list items
+        if (csGrowth.style.display === 'block') {
+            const listItems = csWorkList.querySelectorAll('li');
+            if (listItems.length > 0) {
+                tl.fromTo(listItems,
+                    { opacity: 0, x: -20 },
+                    { opacity: 1, x: 0, stagger: 0.05, duration: 0.8, ease: "power2.out" },
+                    "-=0.4"
+                );
+            }
+        }
+    }
+
+    function closeOverlay() {
+        const tl = gsap.timeline({
+            onComplete: () => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = ''; // Restore
+                if (typeof lenis !== 'undefined') lenis.start();
+            }
+        });
+        
+        tl.to('#csContent > *', { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" });
+        tl.to(overlay, { 
+            clipPath: 'circle(0% at 50% 50%)', 
+            opacity: 0, 
+            duration: 0.7, 
+            ease: "power4.inOut" 
+        }, "-=0.1");
+    }
+
+    // Standard work items
+    workLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const workItem = link.closest('.work-item');
+            if (workItem) {
+                csCat.innerText = workItem.querySelector('.wi-cat').innerText;
+                csTitle.innerText = workItem.querySelector('.wi-title').innerText;
+                csDesc.innerText = workItem.querySelector('.wi-desc').innerText;
+                
+                csGrowth.style.display = 'none';
+                csStandard.style.display = 'block';
+            }
+            openOverlay();
+        });
+    });
+
+    // Brand case studies (horizontal scroll)
+    projectBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = btn.closest('.project-card');
+            if (card) {
+                const brand = card.dataset.brand;
+                const accent = card.dataset.accent;
+                const challenge = card.dataset.challenge;
+                const workLines = card.dataset.work.split('|');
+                const result = card.dataset.result;
+                const img = card.dataset.img;
+
+                csCat.innerText = "Growth System Case Study";
+                csTitle.innerHTML = `${brand} <span class="accent">${accent}</span>`;
+                csHeroImg.src = img;
+
+                csChallenge.innerText = challenge;
+                csWorkList.innerHTML = workLines.map(line => `<li>${line}</li>`).join('');
+                csResult.innerText = result;
+
+                csGrowth.style.display = 'block';
+                csStandard.style.display = 'none';
+            }
+            openOverlay();
+        });
+    });
+
+    if (backBtn) {
+        backBtn.addEventListener('click', closeOverlay);
+        
+        // Magnetic effect for back button
+        backBtn.addEventListener('mousemove', (e) => {
+            const rect = backBtn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            gsap.to(backBtn, {
+                x: x * 0.4,
+                y: y * 0.4,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        backBtn.addEventListener('mouseleave', () => {
+            gsap.to(backBtn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+        });
+    }
+}
 
 /* ── BOOKING SYSTEM ── */
 function setupBookingSystem() {
